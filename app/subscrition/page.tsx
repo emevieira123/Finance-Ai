@@ -1,4 +1,4 @@
-export default function Subscription() {
+export default function SubscriptionPage() {
   return (
     <div>
       <h1>Subscription page</h1>
