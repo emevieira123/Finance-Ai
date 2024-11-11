@@ -39,12 +39,15 @@ import {
 } from "@/app/transactions/_types/transaction-request";
 import { TransactionSelect } from "@/app/transactions/_components/transaction-select";
 import { DatePicker } from "../ui/date-picker";
+import { addTransaction } from "@/app/_actions/add-transaction";
+import { useState } from "react";
 
 export function AddTransactionButton() {
+  const [isOpen, onClose] = useState<boolean>(false);
   const form = useForm<TransactionRequestType>({
     resolver: zodResolver(transactionRequestSchema),
     defaultValues: {
-      amount: "",
+      amount: 0,
       category: TransactionCategory.OTHER,
       date: new Date(),
       paymentMethod: TransactionPaymentMethod.CASH,
@@ -52,13 +55,20 @@ export function AddTransactionButton() {
     },
   });
 
-  function onSubmit(data: TransactionRequestType) {
-    console.log(data);
+  async function onSubmit(data: TransactionRequestType) {
+    try {
+      await addTransaction(data);
+      onClose(false);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
     <Dialog
+      open={isOpen}
       onOpenChange={(open) => {
+        onClose(open);
         if (!open) {
           form.reset();
         }
@@ -98,7 +108,14 @@ export function AddTransactionButton() {
                 <FormItem>
                   <FormLabel>Valor</FormLabel>
                   <FormControl>
-                    <MoneyInput placeholder="Digite o valor..." {...field} />
+                    <MoneyInput
+                      placeholder="Digite o valor..."
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
