@@ -6,7 +6,7 @@ import { TypeBadge } from "../_components/type-badge";
 import {
   TRANSACTION_CATEGORY_LABELS,
   TRANSACTION_PAYMENT_METHOD_LABELS,
-} from "../_enums";
+} from "../../_components/shared/enums";
 import { Button } from "@/app/_components/ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
 

@@ -19,3 +19,9 @@ export enum TRANSACTION_PAYMENT_METHOD_LABELS {
   OTHER = "Outros",
   PIX = "Pix",
 }
+
+export enum TRANSACTION_TYPE {
+  EXPENSE = "Despesa",
+  DEPOSIT = "Depósito",
+  INVESTIMENT = "Investimento",
+}
