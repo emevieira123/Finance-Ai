@@ -1,13 +1,8 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import { Navbar } from "./_components/shared/navbar";
+import { validateAuthentication } from "./_utils/validateAuthentication";
 
 export default async function Home() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect("/login");
-  }
+  validateAuthentication();
 
   return (
     <>

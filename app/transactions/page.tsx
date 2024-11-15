@@ -1,11 +1,19 @@
+import { auth } from "@clerk/nextjs/server";
 import { UpsertTransactionButton } from "../_components/shared/add-transaction-button";
 import { Navbar } from "../_components/shared/navbar";
 import { DataTable } from "../_components/ui/data-table";
 import { db } from "../_lib/prisma";
+import { validateAuthentication } from "../_utils/validateAuthentication";
 import { transactionColumns } from "./_columns";
 
 export default async function TransactionsPage() {
-  const transactions = await db.transaction.findMany({});
+  validateAuthentication();
+  const { userId } = await auth();
+
+  const transactions = await db.transaction.findMany({
+    where: { userId: userId as string },
+    orderBy: { name: "desc" },
+  });
 
   return (
     <>
