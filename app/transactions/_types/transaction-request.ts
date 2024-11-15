@@ -31,3 +31,12 @@ export const transactionRequestSchema = z.object({
 });
 
 export type TransactionRequestType = z.infer<typeof transactionRequestSchema>;
+
+export const defaultValues = {
+  name: "",
+  amount: 0,
+  category: TransactionCategory.OTHER,
+  date: new Date(),
+  paymentMethod: TransactionPaymentMethod.CASH,
+  type: TransactionType.EXPENSE,
+};

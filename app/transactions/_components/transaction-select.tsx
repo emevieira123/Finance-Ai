@@ -42,7 +42,10 @@ export function TransactionSelect({
       render={({ field }) => (
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}
-          <Select onValueChange={field.onChange}>
+          <Select
+            onValueChange={field.onChange}
+            defaultValue={field?.value?.toString()}
+          >
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder={placeholder ?? "Selecione"} />
