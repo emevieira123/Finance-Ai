@@ -18,9 +18,8 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
 
   const monthIdInvalid = !month || !isMatch(month, "MM");
   if (monthIdInvalid) {
-    redirect("/?month=1");
+    redirect(`/?month=${new Date().getMonth() + 1}`);
   }
-
   const dashboard = await getDashboard(month);
 
   return (
@@ -41,7 +40,6 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
               />
             </div>
           </div>
-          {/* LastTransations */}
           <LastTransactions lastTransactions={dashboard.lastTransactions} />
         </div>
       </div>
