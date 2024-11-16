@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { UpsertTransactionDialog } from "./upsert-transaction-dialog";
 import { useDialog } from "@/app/transactions/_hooks/useDialog";
 
-export function UpsertTransactionButton() {
+export function AddTransactionButton() {
   const { onOpen } = useDialog();
 
   return (
