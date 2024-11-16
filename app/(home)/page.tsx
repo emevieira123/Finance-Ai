@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { getDashboard } from "../_data/get-dashboard";
 import { TransactionsPieChart } from "./_components/transactions-pie-chart";
 import { ExpensesPerCategory } from "./_components/expenses-per-category";
+import { LastTransactions } from "./_components/last-transactions";
 
 interface HomeProps {
   searchParams: { month: string };
@@ -41,6 +42,7 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
             </div>
           </div>
           {/* LastTransations */}
+          <LastTransactions lastTransactions={dashboard.lastTransactions} />
         </div>
       </div>
     </>
